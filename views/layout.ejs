@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+      <meta charset="utf-8"/>
+      <meta name="viewport" content="width=device-width, initial-scale=1"/>
+      <title>Birthday Reminder</title>
+      <link rel="icon" href="/public/favicon.svg"/>
+      <!-- Tailwind (CDN for simplicity) -->
+      <script src="https://cdn.tailwindcss.com"></script>
+      <!-- Inter font -->
+      <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+      <!-- Custom advanced CSS -->
+      <link rel="stylesheet" href="/public/styles.css">
+    </head>
+
+
+<body class="min-h-screen bg-slate-50 text-slate-800 antialiased">
+  <!-- Animated gradient backdrop -->
+  <div class="app-bg"></div>
+
+      <header class="backdrop-blur-md bg-white/60 border-b sticky top-0 z-30">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex items-center gap-3">
+          <img src="/public/favicon.svg" class="h-7 w-7" alt="logo"/>
+          <h1 class="font-semibold text-lg">Birthday Reminder</h1>
+          <div class="ml-auto hidden md:flex items-center gap-3 text-xs text-slate-600">
+            <span class="inline-flex items-center gap-1 px-2 py-1 rounded-full bg-slate-800 text-white">
+              07:00 Africa/Lagos
+            </span>
+            <a href="/healthz" class="hover:underline">Health</a>
+          </div>
+        </div>
+      </header>
+
+      <main class="max-w-6xl mx-auto px-4 py-8">
+        <%- body %>
+      </main>
+
+    <footer class="max-w-6xl mx-auto px-4 pb-8 text-center text-xs text-slate-600">
+      Built with Node/Express/MongoDB/Nodemailer • © <%= new Date().getFullYear() %>
+    </footer>
+</body>
+</html>

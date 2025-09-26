@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birthday Reminder App</title>
+    <link rel="stylesheet" href="/public/styles.css">
+</head>
+<body>
+    <h2 class="text-xl font-semibold mb-4">Birthday App Reminder</h2>
+    <% const hasErrors = (errors && errors.length); %>
+
+    <div class="grid md:grid-cols-2 gap-8">
+    <section class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold mb-4">Add Celebrant</h2>
+
+        <% if (hasErrors) { %>
+        <div class="mb-4 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-600">
+            <ul class="list-disc pl-5">
+            <% errors.forEach(e => { %><li><%= e.msg %></li><% }) %>
+            </ul>
+        </div>
+        <% } %>
+
+        <form action="/celebrants" method="post" class="space-y-4">
+        <div>
+            <label class="block text-sm font-medium mb-1">Username</label>
+            <input name="username" required value="<%= values.username || '' %>" class="w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring" placeholder="e.g. Ada Lovelace"/>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">Email</label>
+            <input type="email" name="email" required value="<%= values.email || '' %>" class="w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring" placeholder="celebrant@example.com"/>
+        </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">Date of Birth</label>
+            <input type="date" name="dob" required value="<%= values.dob || '' %>" class="w-full rounded-xl border px-3 py-2 focus:outline-none focus:ring"/>
+        </div>
+        <button class="rounded-xl bg-slate-900 text-white px-4 py-2 hover:bg-slate-700">Save</button>
+        </form>
+    </section>
+
+    <section class="bg-white p-6 rounded-2xl shadow">
+        <h2 class="text-xl font-semibold mb-4">All Celebrants</h2>
+        <div class="overflow-x-auto">
+        <table class="min-w-full text-sm">
+            <thead>
+            <tr class="text-left text-slate-500">
+                <th class="py-2">Username</th>
+                <th class="py-2">Email</th>
+                <th class="py-2">Birthday</th>
+                <th class="py-2"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <% if (!celebrants.length) { %>
+                <tr><td colspan="4" class="py-6 text-center text-slate-400">No records yet.</td></tr>
+            <% } %>
+            <% celebrants.forEach(c => { %>
+                <tr class="border-t">
+                <td class="py-2"><%= c.username %></td>
+                <td class="py-2"><%= c.email %></td>
+                <td class="py-2"><%= new Date(c.dob).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' }) %></td>
+                <td class="py-2">
+                    <form action="/celebrants/<%= c._id %>/delete" method="post" onsubmit="return confirm('Delete this celebrant?')">
+                    <button class="text-red-600 hover:underline">Delete</button>
+                    </form>
+                </td>
+                </tr>
+            <% }) %>
+            </tbody>
+        </table>
+        </div>
+    </section>
+    </div>
+
+</body>
+</html>
+
+
