@@ -10,7 +10,7 @@ const helmet = require('helmet');
 const Celebrant = require('./models/Celebrant');
 const celebrantsRouter = require('./routes/celebrants');
 const { runBirthdayJob } = require('./jobs/birthdayJob');
-const JobLog = require('./models/JobLog');
+const JobLog = require('./models/jobLog');
 
 const app = express();
 

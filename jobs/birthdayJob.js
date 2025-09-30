@@ -2,7 +2,7 @@ const { DateTime } = require('luxon');
 const Celebrant = require('../models/Celebrant');
 const { renderBirthdayTemplate } = require('../views/email/birthday.template');
 const { sendBirthdayEmail } = require('../utils/mailer');
-const JobLog = require('../models/JobLog');
+const JobLog = require('../models/jobLog');
 
 const TZ = process.env.TZ || 'Africa/Lagos';
 
